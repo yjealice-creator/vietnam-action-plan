@@ -195,8 +195,15 @@
 
     .toc a:hover { background: var(--soft); color: var(--accent); }
 
+    .toc a.active {
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-weight: 850;
+    }
+
     main {
       min-width: 0;
+      position: relative;
     }
 
     body.editing main[contenteditable="true"] {
@@ -208,6 +215,19 @@
       scroll-margin-top: 112px;
     }
 
+    main > section {
+      display: none;
+      min-height: min(680px, calc(100vh - 210px));
+    }
+
+    main > section.active {
+      display: block;
+    }
+
+    main > section.hero.active {
+      display: grid;
+    }
+
     .hero,
     .band {
       background: var(--surface);
@@ -215,11 +235,11 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: 22px;
-      margin-bottom: 16px;
+      margin-bottom: 0;
+      overflow: auto;
     }
 
     .hero {
-      display: grid;
       grid-template-columns: 1.15fr .85fr;
       gap: 20px;
       align-items: start;
@@ -494,6 +514,40 @@
 
     .muted { color: var(--muted); }
 
+    .deck-controls {
+      grid-column: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 14px;
+      user-select: none;
+    }
+
+    .arrow-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      padding: 0;
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .arrow-btn:disabled {
+      opacity: .35;
+      cursor: default;
+      border-color: #d7dee6;
+    }
+
+    .slide-counter {
+      min-width: 74px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
+    }
+
     @media (max-width: 980px) {
       .topbar-inner,
       .layout,
@@ -506,6 +560,10 @@
       .toc {
         position: static;
         order: 2;
+      }
+
+      .deck-controls {
+        grid-column: 1;
       }
 
       .layout {
@@ -550,6 +608,7 @@
       .topbar,
       .notice,
       .toc,
+      .deck-controls,
       .product-tabs {
         display: none;
       }
@@ -573,8 +632,13 @@
         break-inside: avoid;
       }
 
+      main > section,
       .product-panel {
         display: block;
+      }
+
+      main > section.hero {
+        display: grid;
       }
     }
   </style>
@@ -615,7 +679,7 @@
     </nav>
 
     <main id="page" contenteditable="true">
-      <section id="root" class="hero">
+      <section id="root" class="hero active">
         <div>
           <p class="eyebrow" data-ko="Orientation" data-en="Orientation" data-vi="Dinh huong">Orientation</p>
           <h2 data-ko="문제에서 실행 가능한 정책 브리핑까지" data-en="From Policy Problem to Actionable Briefing" data-vi="Tu van de chinh sach den ban de xuat co the thuc hien">문제에서 실행 가능한 정책 브리핑까지</h2>
@@ -772,6 +836,11 @@
         </ul>
       </section>
     </main>
+    <div class="deck-controls" aria-label="Slide navigation">
+      <button id="prevSlide" class="arrow-btn" type="button" aria-label="Previous slide">‹</button>
+      <div id="slideCounter" class="slide-counter">1 / 7</div>
+      <button id="nextSlide" class="arrow-btn primary" type="button" aria-label="Next slide">›</button>
+    </div>
   </div>
 
   <script>
@@ -781,10 +850,40 @@
     const downloadButton = document.getElementById("download");
     const printButton = document.getElementById("print");
     const resetButton = document.getElementById("reset");
+    const prevSlideButton = document.getElementById("prevSlide");
+    const nextSlideButton = document.getElementById("nextSlide");
+    const slideCounter = document.getElementById("slideCounter");
     const languageButtons = document.querySelectorAll("[data-lang]");
-    const storageKey = "vietnam-action-plan-baseline-v3";
+    const storageKey = "vietnam-action-plan-baseline-v4";
     const langKey = "vietnam-action-plan-language";
     const originalHtml = page.innerHTML;
+    let currentSlide = 0;
+
+    function slides() {
+      return Array.from(page.querySelectorAll("section[id]"));
+    }
+
+    function goToSlide(index, updateHash = true) {
+      const slideList = slides();
+      if (!slideList.length) return;
+
+      currentSlide = Math.max(0, Math.min(index, slideList.length - 1));
+      slideList.forEach((slide, slideIndex) => {
+        slide.classList.toggle("active", slideIndex === currentSlide);
+      });
+
+      document.querySelectorAll(".toc a").forEach((link) => {
+        link.classList.toggle("active", link.getAttribute("href") === `#${slideList[currentSlide].id}`);
+      });
+
+      slideCounter.textContent = `${currentSlide + 1} / ${slideList.length}`;
+      prevSlideButton.disabled = currentSlide === 0;
+      nextSlideButton.disabled = currentSlide === slideList.length - 1;
+
+      if (updateHash) {
+        history.replaceState(null, "", `#${slideList[currentSlide].id}`);
+      }
+    }
 
     function translate(lang) {
       document.documentElement.lang = lang;
@@ -845,6 +944,17 @@
       });
     }
 
+    function bindToc() {
+      document.querySelectorAll(".toc a").forEach((link) => {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          const targetId = link.getAttribute("href").slice(1);
+          const targetIndex = slides().findIndex((slide) => slide.id === targetId);
+          if (targetIndex >= 0) goToSlide(targetIndex);
+        });
+      });
+    }
+
     const savedHtml = localStorage.getItem(storageKey);
     if (savedHtml) page.innerHTML = savedHtml;
 
@@ -862,13 +972,33 @@
         localStorage.removeItem(storageKey);
         page.innerHTML = originalHtml;
         bindProductTabs();
+        goToSlide(0, false);
         translate(localStorage.getItem(langKey) || "ko");
         setEditing(true);
       }
     });
 
+    prevSlideButton.addEventListener("click", () => goToSlide(currentSlide - 1));
+    nextSlideButton.addEventListener("click", () => goToSlide(currentSlide + 1));
+
+    document.addEventListener("keydown", (event) => {
+      if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        goToSlide(currentSlide + 1);
+      }
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        goToSlide(currentSlide - 1);
+      }
+    });
+
     setEditing(true);
     bindProductTabs();
+    bindToc();
+    const initialHash = window.location.hash.slice(1);
+    const initialIndex = slides().findIndex((slide) => slide.id === initialHash);
+    goToSlide(initialIndex >= 0 ? initialIndex : 0, false);
     translate(localStorage.getItem(langKey) || "ko");
   </script>
 </body>
