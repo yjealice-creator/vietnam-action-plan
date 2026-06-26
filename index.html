@@ -154,6 +154,10 @@
 
     body.editing .notice { display: block; }
 
+    body:not(.editing) .edit-only {
+      display: none;
+    }
+
     .layout {
       max-width: 1180px;
       margin: 0 auto;
@@ -643,12 +647,12 @@
     }
   </style>
 </head>
-<body class="lang-ko editing">
+<body class="lang-ko">
   <header class="topbar">
     <div class="topbar-inner">
       <div>
         <p class="brand-kicker" data-ko="2026 베트남 공무원 연수 프로그램" data-en="2026 Vietnam Public Service Training Program" data-vi="Chuong trinh boi duong cong chuc Viet Nam 2026">2026 베트남 공무원 연수 프로그램</p>
-        <h1 data-ko="Baseline 액션플랜 가이드" data-en="Baseline Action Plan Guide" data-vi="Huong dan co ban ve Ke hoach hanh dong">Baseline 액션플랜 가이드</h1>
+        <h1 data-ko="액션플랜 개발 기준 가이드" data-en="Action Plan Development Guide" data-vi="Huong dan xay dung Ke hoach hanh dong">액션플랜 개발 기준 가이드</h1>
       </div>
       <div class="toolbar">
         <div class="segmented" aria-label="Language">
@@ -656,35 +660,35 @@
           <button id="langEn" type="button" data-lang="en">EN</button>
           <button id="langVi" type="button" data-lang="vi">VI</button>
         </div>
-        <button id="editMode" class="active" type="button" data-ko="수정" data-en="Edit" data-vi="Sua">수정</button>
-        <button id="save" class="primary" type="button" data-ko="저장" data-en="Save" data-vi="Luu">저장</button>
-        <button id="download" type="button" data-ko="HTML 다운로드" data-en="Download HTML" data-vi="Tai HTML">HTML 다운로드</button>
+        <button id="editMode" type="button" data-ko="편집" data-en="Edit" data-vi="Sua">편집</button>
+        <button id="save" class="primary edit-only" type="button" data-ko="저장" data-en="Save" data-vi="Luu">저장</button>
+        <button id="download" class="edit-only" type="button" data-ko="HTML 다운로드" data-en="Download HTML" data-vi="Tai HTML">HTML 다운로드</button>
         <button id="print" type="button" data-ko="인쇄" data-en="Print" data-vi="In">인쇄</button>
-        <button id="reset" type="button" data-ko="초기화" data-en="Reset" data-vi="Dat lai">초기화</button>
+        <button id="reset" class="edit-only" type="button" data-ko="초기화" data-en="Reset" data-vi="Dat lai">초기화</button>
       </div>
     </div>
-    <div class="notice" data-ko="수정 모드입니다. 본문을 클릭해 내용을 고친 뒤 저장하거나 HTML로 내려받을 수 있습니다." data-en="Edit mode is on. Click the page body to revise content, then save or download the HTML." data-vi="Dang o che do sua. Bam vao noi dung de chinh sua, sau do luu hoac tai HTML.">수정 모드입니다. 본문을 클릭해 내용을 고친 뒤 저장하거나 HTML로 내려받을 수 있습니다.</div>
+    <div class="notice" data-ko="편집 모드입니다. 본문 수정 후 저장하거나 HTML 파일로 내려받을 수 있습니다." data-en="Edit mode is on. Revise the page body, then save or download the HTML file." data-vi="Dang o che do sua. Chinh sua noi dung, sau do luu hoac tai tep HTML.">편집 모드입니다. 본문 수정 후 저장하거나 HTML 파일로 내려받을 수 있습니다.</div>
   </header>
 
   <div class="layout">
     <nav class="toc" aria-label="Table of contents">
       <p class="toc-title" data-ko="목차" data-en="Contents" data-vi="Muc luc">목차</p>
       <a href="#root" data-ko="1. 메인 구조" data-en="1. Main Structure" data-vi="1. Cau truc chinh">1. 메인 구조</a>
-      <a href="#products" data-ko="2. 산출물 구분" data-en="2. Final Products" data-vi="2. San pham dau ra">2. 산출물 구분</a>
-      <a href="#shared" data-ko="3. 공통 작업 절차" data-en="3. Shared Workflow" data-vi="3. Quy trinh chung">3. 공통 작업 절차</a>
-      <a href="#team" data-ko="4. 팀 발표 구조" data-en="4. Team Presentation" data-vi="4. Thuyet trinh nhom">4. 팀 발표 구조</a>
-      <a href="#report" data-ko="5. 개인 리포트 구조" data-en="5. Individual Report" data-vi="5. Bao cao ca nhan">5. 개인 리포트 구조</a>
-      <a href="#templates" data-ko="6. 양식 다운로드" data-en="6. Template Downloads" data-vi="6. Tai bieu mau">6. 양식 다운로드</a>
-      <a href="#quality" data-ko="7. 평가 기준" data-en="7. Quality Gate" data-vi="7. Tieu chi danh gia">7. 평가 기준</a>
+      <a href="#products" data-ko="2. 산출물 체계" data-en="2. Output Framework" data-vi="2. Khung san pham">2. 산출물 체계</a>
+      <a href="#shared" data-ko="3. 공통 개발 절차" data-en="3. Shared Development Process" data-vi="3. Quy trinh phat trien chung">3. 공통 개발 절차</a>
+      <a href="#team" data-ko="4. 팀 발표" data-en="4. Team Presentation" data-vi="4. Thuyet trinh nhom">4. 팀 발표</a>
+      <a href="#report" data-ko="5. 개인 보고서" data-en="5. Individual Report" data-vi="5. Bao cao ca nhan">5. 개인 보고서</a>
+      <a href="#templates" data-ko="6. 제출 양식" data-en="6. Submission Templates" data-vi="6. Bieu mau nop bai">6. 제출 양식</a>
+      <a href="#quality" data-ko="7. 품질 기준" data-en="7. Quality Criteria" data-vi="7. Tieu chi chat luong">7. 품질 기준</a>
     </nav>
 
-    <main id="page" contenteditable="true">
+    <main id="page" contenteditable="false">
       <section id="root" class="hero active">
         <div>
           <p class="eyebrow" data-ko="Orientation" data-en="Orientation" data-vi="Dinh huong">Orientation</p>
-          <h2 data-ko="문제에서 실행 가능한 정책 브리핑까지" data-en="From Policy Problem to Actionable Briefing" data-vi="Tu van de chinh sach den ban de xuat co the thuc hien">문제에서 실행 가능한 정책 브리핑까지</h2>
-          <p class="lead" data-ko="이 자료는 예쁜 템플릿보다 연수생이 실제로 따라갈 수 있는 작업 절차, 산출물 구조, 평가 기준을 먼저 제공합니다." data-en="This guide prioritizes a usable work process, output structure, and quality criteria over decorative templates." data-vi="Tai lieu nay uu tien quy trinh lam viec, cau truc san pham va tieu chi chat luong hon mau trinh bay dep.">이 자료는 예쁜 템플릿보다 연수생이 실제로 따라갈 수 있는 작업 절차, 산출물 구조, 평가 기준을 먼저 제공합니다.</p>
-          <div class="message" data-ko="Problem first, not solution first. Evidence before recommendation. Options before decision. Implementation before ambition." data-en="Problem first, not solution first. Evidence before recommendation. Options before decision. Implementation before ambition." data-vi="Bat dau tu van de, khong tu giai phap. Dua bang chung truoc khuyen nghi. So sanh phuong an truoc quyet dinh. Uu tien kha nang thuc thi.">Problem first, not solution first. Evidence before recommendation. Options before decision. Implementation before ambition.</div>
+          <h2 data-ko="정책문제 분석에서 실행 가능한 액션플랜까지" data-en="From Policy Problem Analysis to Implementable Action Plan" data-vi="Tu phan tich van de chinh sach den ke hoach hanh dong kha thi">정책문제 분석에서 실행 가능한 액션플랜까지</h2>
+          <p class="lead" data-ko="본 가이드는 베트남 공무원 연수 과정에서 팀 발표와 개인 정책보고서를 일관된 기준에 따라 작성하도록 지원하는 표준 개발 체계이다." data-en="This guide provides a standard development framework for preparing team presentations and individual policy reports in the Vietnam public service training program." data-vi="Tai lieu nay cung cap khung phat trien tieu chuan de xay dung bai thuyet trinh nhom va bao cao chinh sach ca nhan trong chuong trinh boi duong cong chuc Viet Nam.">본 가이드는 베트남 공무원 연수 과정에서 팀 발표와 개인 정책보고서를 일관된 기준에 따라 작성하도록 지원하는 표준 개발 체계이다.</p>
+          <div class="message" data-ko="문제정의 → 근거 진단 → 대안 비교 → 실행 설계 → 성과관리" data-en="Problem Definition → Evidence Diagnosis → Option Comparison → Implementation Design → Performance Management" data-vi="Xac dinh van de → Chan doan bang chung → So sanh phuong an → Thiet ke thuc hien → Quan ly ket qua">문제정의 → 근거 진단 → 대안 비교 → 실행 설계 → 성과관리</div>
         </div>
         <aside class="meta-card">
           <dl>
@@ -697,36 +701,36 @@
               <dd data-ko="팀 발표 PPT + 개인 정책 리포트" data-en="Team presentation deck + individual policy report" data-vi="Bai thuyet trinh nhom + bao cao chinh sach ca nhan">팀 발표 PPT + 개인 정책 리포트</dd>
             </div>
             <div>
-              <dt data-ko="구조 판단" data-en="Structure decision" data-vi="Quyet dinh cau truc">구조 판단</dt>
-              <dd data-ko="공통 방법론은 같이, 최종 양식은 분리" data-en="Shared method, separate final formats" data-vi="Chung phuong phap, tach bieu mau cuoi cung">공통 방법론은 같이, 최종 양식은 분리</dd>
+              <dt data-ko="기준 체계" data-en="Guiding structure" data-vi="Cau truc dinh huong">기준 체계</dt>
+              <dd data-ko="공통 개발 절차 + 산출물별 작성 기준" data-en="Shared development process + output-specific standards" data-vi="Quy trinh chung + tieu chuan rieng theo san pham">공통 개발 절차 + 산출물별 작성 기준</dd>
             </div>
           </dl>
         </aside>
       </section>
 
       <section id="products" class="band">
-        <p class="eyebrow" data-ko="Structure Decision" data-en="Structure Decision" data-vi="Quyet dinh cau truc">Structure Decision</p>
-        <h2 data-ko="팀 발표와 개인 리포트는 쪼개되, 앞단의 학습 흐름은 같이 갑니다" data-en="Separate the final products, but keep one shared learning flow" data-vi="Tach san pham cuoi cung, nhung giu chung mot dong hoc tap">팀 발표와 개인 리포트는 쪼개되, 앞단의 학습 흐름은 같이 갑니다</h2>
+        <p class="eyebrow" data-ko="Output Framework" data-en="Output Framework" data-vi="Khung san pham">Output Framework</p>
+        <h2 data-ko="공통 개발 절차와 산출물별 작성 기준의 분리" data-en="Shared Development Process with Output-Specific Standards" data-vi="Quy trinh phat trien chung va tieu chuan rieng theo san pham">공통 개발 절차와 산출물별 작성 기준의 분리</h2>
         <div class="decision">
-          <p data-ko="검토 의견: GPT가 제안한 구조는 방향이 좋습니다. 다만 웹페이지에서는 처음부터 팀 발표와 개인 리포트를 완전히 분리하면 중복이 많아지고, 완전히 합치면 산출물의 성격 차이가 흐려집니다. 따라서 공통 절차는 하나로 두고, 최종 산출물 섹션에서 팀 발표와 개인 리포트를 분리하는 방식이 가장 적합합니다." data-en="Review: The proposed structure is sound. However, fully separating team presentation and individual report from the start creates duplication, while fully merging them blurs the difference between outputs. The best baseline is one shared process with two clearly separated final-product tracks." data-vi="Nhan xet: Cau truc duoc de xuat la phu hop. Tuy nhien, tach rieng ngay tu dau se lap lai nhieu noi dung, con gop hoan toan se lam mo khac biet giua hai san pham. Phuong an tot nhat la mot quy trinh chung va hai nhanh san pham rieng.">검토 의견: GPT가 제안한 구조는 방향이 좋습니다. 다만 웹페이지에서는 처음부터 팀 발표와 개인 리포트를 완전히 분리하면 중복이 많아지고, 완전히 합치면 산출물의 성격 차이가 흐려집니다. 따라서 공통 절차는 하나로 두고, 최종 산출물 섹션에서 팀 발표와 개인 리포트를 분리하는 방식이 가장 적합합니다.</p>
+          <p data-ko="자료 간 직접적인 모순은 크지 않으나, 팀 발표용 자료와 개인 보고서용 자료, 기존 워크숍형 템플릿과 2026 베트남 표준안 사이에는 강조점과 범위의 차이가 있다. 본 가이드는 2026 Vietnam Action Plan Development Standard를 상위 구조로 삼고, 기존 Action Plan Guideline은 팀 발표의 보조 질문으로, Individual Policy Report Guideline은 개인 보고서의 작성 기준으로 반영한다." data-en="The source materials are not fundamentally contradictory, but they differ in emphasis, format, and scope. This guide adopts the 2026 Vietnam Action Plan Development Standard as the primary structure, uses the existing Action Plan Guideline as supporting questions for the team presentation, and applies the Individual Policy Report Guideline as the standard for the written assignment." data-vi="Cac tai lieu khong mau thuan truc tiep, nhung khac nhau ve trong tam, hinh thuc va pham vi. Huong dan nay lay 2026 Vietnam Action Plan Development Standard lam cau truc chinh, su dung Action Plan Guideline nhu bo cau hoi ho tro cho thuyet trinh nhom, va ap dung Individual Policy Report Guideline cho bai bao cao ca nhan.">자료 간 직접적인 모순은 크지 않으나, 팀 발표용 자료와 개인 보고서용 자료, 기존 워크숍형 템플릿과 2026 베트남 표준안 사이에는 강조점과 범위의 차이가 있다. 본 가이드는 2026 Vietnam Action Plan Development Standard를 상위 구조로 삼고, 기존 Action Plan Guideline은 팀 발표의 보조 질문으로, Individual Policy Report Guideline은 개인 보고서의 작성 기준으로 반영한다.</p>
         </div>
         <div class="grid two">
           <article class="card">
             <span class="tag">A</span>
             <h3 data-ko="팀 Action Plan Presentation" data-en="Team Action Plan Presentation" data-vi="Thuyet trinh ke hoach hanh dong nhom">팀 Action Plan Presentation</h3>
-            <p data-ko="15분 내외의 의사결정자 브리핑입니다. 팀은 하나의 공통 정책문제를 선택하고, 승인 또는 지원을 요청할 수 있는 실행계획으로 제시합니다." data-en="A decision briefing of about 15 minutes. The team selects one shared policy problem and presents an implementable plan that asks for approval or support." data-vi="Mot ban trinh bay khoang 15 phut cho nguoi ra quyet dinh. Nhom chon mot van de chung va de xuat ke hoach co the thuc hien de xin phe duyet hoac ho tro.">15분 내외의 의사결정자 브리핑입니다. 팀은 하나의 공통 정책문제를 선택하고, 승인 또는 지원을 요청할 수 있는 실행계획으로 제시합니다.</p>
+            <p data-ko="공통 정책문제에 대한 간결한 의사결정 브리핑이다. 문제정의, 대안 비교, 실행 로드맵, KPI, 의사결정 요청을 중심으로 구성한다." data-en="A concise decision briefing on one shared policy problem. It emphasizes problem definition, option comparison, implementation roadmap, KPIs, and a decision request." data-vi="Ban trinh bay ngan gon ve mot van de chinh sach chung. Noi dung tap trung vao xac dinh van de, so sanh phuong an, lo trinh thuc hien, KPI va de nghi quyet dinh.">공통 정책문제에 대한 간결한 의사결정 브리핑이다. 문제정의, 대안 비교, 실행 로드맵, KPI, 의사결정 요청을 중심으로 구성한다.</p>
           </article>
           <article class="card">
             <span class="tag">B</span>
             <h3 data-ko="Individual Policy Report" data-en="Individual Policy Report" data-vi="Bao cao chinh sach ca nhan">Individual Policy Report</h3>
-            <p data-ko="문서형 정책보고서입니다. 개인은 자기 부처나 기관의 실제 정책문제를 분석하고, 근거 기반 대안 비교와 권고안을 제시합니다." data-en="An analytical policy report. Each participant analyzes a real policy problem in their own ministry or agency and presents evidence-based options and recommendations." data-vi="Bao cao chinh sach dang van ban. Moi hoc vien phan tich mot van de thuc te cua co quan minh va dua ra phuong an, khuyen nghi dua tren bang chung.">문서형 정책보고서입니다. 개인은 자기 부처나 기관의 실제 정책문제를 분석하고, 근거 기반 대안 비교와 권고안을 제시합니다.</p>
+            <p data-ko="개별 부처·기관의 정책문제에 대한 분석적 문서 과제이다. 상황 분석, 분석틀, 대안 평가, 권고안, 모니터링 및 평가 체계를 포함한다." data-en="An analytical written assignment on a policy problem in the participant's ministry or agency. It includes situational analysis, analytical framework, option assessment, recommendation, and monitoring and evaluation." data-vi="Bai viet phan tich ve mot van de chinh sach cua bo, nganh hoac co quan cua hoc vien. Bao gom phan tich hien trang, khung phan tich, danh gia phuong an, khuyen nghi, giam sat va danh gia.">개별 부처·기관의 정책문제에 대한 분석적 문서 과제이다. 상황 분석, 분석틀, 대안 평가, 권고안, 모니터링 및 평가 체계를 포함한다.</p>
           </article>
         </div>
       </section>
 
       <section id="shared" class="band">
-        <p class="eyebrow" data-ko="Main Root" data-en="Main Root" data-vi="Goc cau truc">Main Root</p>
-        <h2 data-ko="공통 작업 절차: Problem → Evidence → Options → Implementation → Results" data-en="Shared Workflow: Problem → Evidence → Options → Implementation → Results" data-vi="Quy trinh chung: Van de → Bang chung → Phuong an → Thuc hien → Ket qua">공통 작업 절차: Problem → Evidence → Options → Implementation → Results</h2>
+        <p class="eyebrow" data-ko="Development Standard" data-en="Development Standard" data-vi="Tieu chuan phat trien">Development Standard</p>
+        <h2 data-ko="공통 개발 절차: Problem → Evidence → Options → Implementation → Results" data-en="Shared Development Process: Problem → Evidence → Options → Implementation → Results" data-vi="Quy trinh phat trien chung: Van de → Bang chung → Phuong an → Thuc hien → Ket qua">공통 개발 절차: Problem → Evidence → Options → Implementation → Results</h2>
         <div class="flow" aria-label="Shared action plan workflow">
           <div class="flow-step">
             <strong data-ko="1. 문제정의" data-en="1. Problem" data-vi="1. Van de">1. 문제정의</strong>
@@ -738,7 +742,7 @@
           </div>
           <div class="flow-step">
             <strong data-ko="3. 한국사례 번역" data-en="3. Korea Lessons" data-vi="3. Bai hoc Han Quoc">3. 한국사례 번역</strong>
-            <span data-ko="한국 제도를 복사하지 않고 설계 원리를 베트남 맥락에 맞춥니다." data-en="Translate Korean design principles instead of copying systems." data-vi="Chuyen hoa nguyen ly thiet ke cua Han Quoc, khong sao chep he thong.">한국 제도를 복사하지 않고 설계 원리를 베트남 맥락에 맞춥니다.</span>
+            <span data-ko="1-3개 사례를 adopt / modify / avoid 기준으로 해석합니다." data-en="Interpret 1-3 Korean cases through adopt / modify / avoid criteria." data-vi="Phan tich 1-3 bai hoc Han Quoc theo tieu chi ap dung / dieu chinh / tranh.">1-3개 사례를 adopt / modify / avoid 기준으로 해석합니다.</span>
           </div>
           <div class="flow-step">
             <strong data-ko="4. 대안비교" data-en="4. Options" data-vi="4. Phuong an">4. 대안비교</strong>
@@ -750,14 +754,32 @@
           </div>
           <div class="flow-step">
             <strong data-ko="6. 성과관리" data-en="6. Results" data-vi="6. Ket qua">6. 성과관리</strong>
-            <span data-ko="Output, Outcome, Impact와 KPI, 위험 완화방안을 제시합니다." data-en="Define outputs, outcomes, impact, KPIs, and risk mitigation." data-vi="Xac dinh dau ra, ket qua, tac dong, KPI va giam thieu rui ro.">Output, Outcome, Impact와 KPI, 위험 완화방안을 제시합니다.</span>
+            <span data-ko="1개 goal, 최대 3개 objectives, 3-5개 KPI를 연결합니다." data-en="Link one policy goal, up to three objectives, and 3-5 KPIs." data-vi="Lien ket mot muc tieu chinh sach, toi da ba muc tieu cu the va 3-5 KPI.">1개 goal, 최대 3개 objectives, 3-5개 KPI를 연결합니다.</span>
           </div>
         </div>
+        <table>
+          <tr>
+            <th data-ko="통합 기준" data-en="Integration Rule" data-vi="Nguyen tac tich hop">통합 기준</th>
+            <th data-ko="baseline 반영 방향" data-en="Baseline Application" data-vi="Cach ap dung">baseline 반영 방향</th>
+          </tr>
+          <tr>
+            <td data-ko="자원·실행 조건" data-en="Resources and enablers" data-vi="Nguon luc va dieu kien">자원·실행 조건</td>
+            <td data-ko="Institutional/Legal, Budget/Financing, Human Resources/Capacity, Data/Technology/Infrastructure, Communication/Partnerships의 5대 enabler로 정리한다." data-en="Use five enablers: Institutional/Legal, Budget/Financing, Human Resources/Capacity, Data/Technology/Infrastructure, and Communication/Partnerships." data-vi="Su dung nam nhom dieu kien: the che/phap ly, ngan sach/tai chinh, nhan luc/nang luc, du lieu/cong nghe/ha tang, truyen thong/doi tac.">Institutional/Legal, Budget/Financing, Human Resources/Capacity, Data/Technology/Infrastructure, Communication/Partnerships의 5대 enabler로 정리한다.</td>
+          </tr>
+          <tr>
+            <td data-ko="기술 요소" data-en="Technical component" data-vi="Thanh phan ky thuat">기술 요소</td>
+            <td data-ko="디지털·AI 정책은 technical architecture를 포함하고, 비기술 정책은 institutional design 또는 service delivery model로 대체한다." data-en="Digital or AI-based topics include technical architecture; non-technical topics may use institutional design or service delivery model instead." data-vi="Chu de so hoa hoac AI can kien truc ky thuat; chu de phi ky thuat co the thay bang thiet ke the che hoac mo hinh cung ung dich vu.">디지털·AI 정책은 technical architecture를 포함하고, 비기술 정책은 institutional design 또는 service delivery model로 대체한다.</td>
+          </tr>
+          <tr>
+            <td data-ko="시간 범위" data-en="Time horizon" data-vi="Khung thoi gian">시간 범위</td>
+            <td data-ko="기본 로드맵은 0-12개월 실행계획으로 제시하고, 필요한 경우 2-5년 scale-up plan을 별도로 제시한다." data-en="Present the core roadmap as a 0-12 month implementation plan, with an optional 2-5 year scale-up plan." data-vi="Trinh bay lo trinh chinh trong 0-12 thang, va neu can co ke hoach mo rong 2-5 nam.">기본 로드맵은 0-12개월 실행계획으로 제시하고, 필요한 경우 2-5년 scale-up plan을 별도로 제시한다.</td>
+          </tr>
+        </table>
       </section>
 
       <section id="team" class="band">
         <p class="eyebrow" data-ko="Team Presentation" data-en="Team Presentation" data-vi="Thuyet trinh nhom">Team Presentation</p>
-        <h2 data-ko="팀 발표는 정책 아이디어 발표가 아니라 결정 요청 브리핑입니다" data-en="The team presentation is a decision briefing, not an idea pitch" data-vi="Bai thuyet trinh nhom la ban de nghi quyet dinh, khong chi la y tuong">팀 발표는 정책 아이디어 발표가 아니라 결정 요청 브리핑입니다</h2>
+        <h2 data-ko="팀 발표: 정책결정자를 대상으로 한 실행계획 브리핑" data-en="Team Presentation: Implementation Briefing for Decision-Makers" data-vi="Thuyet trinh nhom: ban tom tat ke hoach thuc hien cho nguoi ra quyet dinh">팀 발표: 정책결정자를 대상으로 한 실행계획 브리핑</h2>
         <table>
           <tr>
             <th data-ko="순서" data-en="Order" data-vi="Thu tu">순서</th>
@@ -781,7 +803,7 @@
 
       <section id="report" class="band">
         <p class="eyebrow" data-ko="Individual Report" data-en="Individual Report" data-vi="Bao cao ca nhan">Individual Report</p>
-        <h2 data-ko="개인 리포트는 자기 기관의 정책문제를 분석하는 문서형 보고서입니다" data-en="The individual report is an analytical policy report for each participant's institution" data-vi="Bao cao ca nhan la bao cao phan tich van de chinh sach cua co quan moi hoc vien">개인 리포트는 자기 기관의 정책문제를 분석하는 문서형 보고서입니다</h2>
+        <h2 data-ko="개인 보고서: 소속 기관의 정책문제에 대한 분석적 권고" data-en="Individual Report: Analytical Recommendation for an Institutional Policy Problem" data-vi="Bao cao ca nhan: khuyen nghi phan tich cho van de chinh sach cua co quan">개인 보고서: 소속 기관의 정책문제에 대한 분석적 권고</h2>
         <div class="product-tabs" aria-label="Product panels">
           <button type="button" class="product-tab active" data-panel="report-outline" data-ko="권장 목차" data-en="Recommended Outline" data-vi="De cuong de xuat">권장 목차</button>
           <button type="button" class="product-tab" data-panel="compare" data-ko="팀 발표와 차이" data-en="Difference from Team Deck" data-vi="Khac voi thuyet trinh nhom">팀 발표와 차이</button>
@@ -808,16 +830,16 @@
 
       <section id="templates" class="band">
         <p class="eyebrow" data-ko="Downloads" data-en="Downloads" data-vi="Tai ve">Downloads</p>
-        <h2 data-ko="팀 발표 PPT와 개인 리포트 양식은 여기서 바로 다운로드하도록 둡니다" data-en="Team presentation and individual report templates will be downloaded here" data-vi="Tai mau thuyet trinh nhom va bao cao ca nhan tai day">팀 발표 PPT와 개인 리포트 양식은 여기서 바로 다운로드하도록 둡니다</h2>
+        <h2 data-ko="제출 양식 및 참고 템플릿" data-en="Submission Templates and Reference Files" data-vi="Bieu mau nop bai va tep tham khao">제출 양식 및 참고 템플릿</h2>
         <div class="download-grid">
           <article class="download-card">
             <h3 data-ko="팀 발표 PPT 양식" data-en="Team Presentation PPT Template" data-vi="Mau PPT thuyet trinh nhom">팀 발표 PPT 양식</h3>
-            <p data-ko="팀별 Action Plan 발표에 사용할 표준 PPT 양식입니다. 파일을 첨부하면 아래 버튼이 바로 다운로드 링크가 됩니다." data-en="Standard PPT template for the team action plan presentation. Once attached, the button below will download it directly." data-vi="Mau PPT chuan cho thuyet trinh ke hoach hanh dong nhom. Khi tep duoc dinh kem, nut duoi se tai truc tiep.">팀별 Action Plan 발표에 사용할 표준 PPT 양식입니다. 파일을 첨부하면 아래 버튼이 바로 다운로드 링크가 됩니다.</p>
+            <p data-ko="팀별 Action Plan Presentation 작성에 사용하는 표준 발표 양식이다." data-en="Standard presentation template for preparing the team Action Plan Presentation." data-vi="Mau thuyet trinh chuan de xay dung bai Action Plan Presentation cua nhom.">팀별 Action Plan Presentation 작성에 사용하는 표준 발표 양식이다.</p>
             <a class="button primary" href="templates/team-action-plan-template.pptx" download data-ko="PPT 다운로드" data-en="Download PPT" data-vi="Tai PPT">PPT 다운로드</a>
           </article>
           <article class="download-card">
             <h3 data-ko="개인 정책 리포트 양식" data-en="Individual Policy Report Template" data-vi="Mau bao cao chinh sach ca nhan">개인 정책 리포트 양식</h3>
-            <p data-ko="개인별 정책보고서 작성에 사용할 Word 양식입니다. 파일을 첨부하면 아래 버튼이 바로 다운로드 링크가 됩니다." data-en="Word template for the individual policy report. Once attached, the button below will download it directly." data-vi="Mau Word cho bao cao chinh sach ca nhan. Khi tep duoc dinh kem, nut duoi se tai truc tiep.">개인별 정책보고서 작성에 사용할 Word 양식입니다. 파일을 첨부하면 아래 버튼이 바로 다운로드 링크가 됩니다.</p>
+            <p data-ko="개인별 Individual Policy Report 작성에 사용하는 표준 문서 양식이다." data-en="Standard document template for preparing the individual policy report." data-vi="Mau van ban chuan de xay dung Individual Policy Report cua tung hoc vien.">개인별 Individual Policy Report 작성에 사용하는 표준 문서 양식이다.</p>
             <a class="button primary" href="templates/individual-policy-report-template.docx" download data-ko="DOCX 다운로드" data-en="Download DOCX" data-vi="Tai DOCX">DOCX 다운로드</a>
           </article>
         </div>
@@ -825,7 +847,7 @@
 
       <section id="quality" class="band">
         <p class="eyebrow" data-ko="Quality Gate" data-en="Quality Gate" data-vi="Kiem tra chat luong">Quality Gate</p>
-        <h2 data-ko="교수님께 보여드릴 baseline의 평가 기준" data-en="Baseline quality criteria for review" data-vi="Tieu chi chat luong co ban de xem xet">교수님께 보여드릴 baseline의 평가 기준</h2>
+        <h2 data-ko="산출물 품질 기준" data-en="Output Quality Criteria" data-vi="Tieu chi chat luong san pham">산출물 품질 기준</h2>
         <ul class="checklist">
           <li data-ko="문제가 솔루션이 아니라 부정적 상태로 정의되었는가?" data-en="Is the problem defined as a negative condition, not a solution?" data-vi="Van de co duoc dinh nghia la tinh trang bat loi, khong phai giai phap?">문제가 솔루션이 아니라 부정적 상태로 정의되었는가?</li>
           <li data-ko="근거와 원인 진단이 대안보다 먼저 제시되는가?" data-en="Does evidence and root-cause diagnosis come before recommendations?" data-vi="Bang chung va chan doan nguyen nhan co truoc khuyen nghi?">근거와 원인 진단이 대안보다 먼저 제시되는가?</li>
@@ -854,7 +876,7 @@
     const nextSlideButton = document.getElementById("nextSlide");
     const slideCounter = document.getElementById("slideCounter");
     const languageButtons = document.querySelectorAll("[data-lang]");
-    const storageKey = "vietnam-action-plan-baseline-v4";
+    const storageKey = "vietnam-action-plan-baseline-v5";
     const langKey = "vietnam-action-plan-language";
     const originalHtml = page.innerHTML;
     let currentSlide = 0;
@@ -974,7 +996,7 @@
         bindProductTabs();
         goToSlide(0, false);
         translate(localStorage.getItem(langKey) || "ko");
-        setEditing(true);
+        setEditing(false);
       }
     });
 
@@ -993,7 +1015,7 @@
       }
     });
 
-    setEditing(true);
+    setEditing(false);
     bindProductTabs();
     bindToc();
     const initialHash = window.location.hash.slice(1);
