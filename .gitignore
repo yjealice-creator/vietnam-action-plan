@@ -1,6 +1,10 @@
 ~$*
 .DS_Store
 Thumbs.db
+.tmp/
 *.docx
 *.pdf
 *.pptx
+!templates/
+!templates/*.docx
+!templates/*.pptx
